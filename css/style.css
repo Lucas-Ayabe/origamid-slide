@@ -23,8 +23,13 @@ img {
 }
 
 .slider__slide {
+    cursor: grab;
     width: 80vw;
     max-width: 800px;
     margin: 0 20px;
     flex-shrink: 0;
+}
+
+.slider__slide:active {
+    cursor: grabbing;
 }

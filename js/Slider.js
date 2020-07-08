@@ -2,23 +2,39 @@ export default class Slider {
     constructor(slides, slider) {
         this.slides = document.querySelector(slides);
         this.slider = document.querySelector(slider);
+
+        this.distances = {
+            finalPosition: 0,
+            startX: 0,
+            movement: 0,
+            movePosition: 0,
+        };
     }
 
     onStart(event) {
         event.preventDefault();
+        this.distances.startX = event.clientX;
         this.slider.addEventListener("mousemove", this.onMove);
-
-        console.log(this);
-        console.log("active");
     }
 
     onMove(event) {
-        console.log("moveu");
+        const finalPosition = this.updatePosition(event.clientX);
+        this.moveSlide(finalPosition);
     }
 
-    onEnd(event) {
+    onEnd() {
         this.slider.removeEventListener("mousemove", this.onMove);
-        console.log("acabou");
+        this.distances.finalPosition = this.distances.movePosition;
+    }
+
+    updatePosition(clientX) {
+        this.distances.movement = (this.distances.startX - clientX) * 1.6;
+        return this.distances.finalPosition - this.distances.movement;
+    }
+
+    moveSlide(distX) {
+        this.distances.movePosition = distX;
+        this.slides.style.transform = `translate3d(${distX}px, 0, 0)`;
     }
 
     bindEvents() {
