@@ -20,16 +20,16 @@ img {
 .slider__slides {
     display: flex;
     transform: translate3d(0, 0, 0);
+    cursor: grab;
 }
 
 .slider__slide {
-    cursor: grab;
     width: 80vw;
     max-width: 800px;
     margin: 0 20px;
     flex-shrink: 0;
 }
 
-.slider__slide:active {
+.slider__slides:active {
     cursor: grabbing;
 }
