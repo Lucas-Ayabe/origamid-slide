@@ -1,0 +1,15 @@
+{
+    "name": "projeto-slide",
+    "version": "1.0.0",
+    "main": "index.js",
+    "repository": "git@github.com:Lucas-Ayabe/origamid-slide.git",
+    "author": "Lucas Akira Ayabe <lucas.ayabe@gmail.com>",
+    "license": "MIT",
+    "devDependencies": {
+        "eslint": "^7.4.0",
+        "eslint-config-airbnb-base": "^14.2.0",
+        "eslint-config-prettier": "^6.11.0",
+        "eslint-plugin-import": "^2.22.0"
+    },
+    "dependencies": {}
+}
