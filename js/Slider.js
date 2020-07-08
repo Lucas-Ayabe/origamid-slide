@@ -13,17 +13,29 @@ export default class Slider {
 
     onStart(event) {
         event.preventDefault();
-        this.distances.startX = event.clientX;
-        this.slider.addEventListener("mousemove", this.onMove);
+
+        const moveType = `${event.type.substr(0, 5)}move`;
+        const pointerPosition =
+            event.type === "mousedown"
+                ? event.clientX
+                : event.changedTouches[0].clientX;
+
+        this.distances.startX = pointerPosition;
+        this.slider.addEventListener(moveType, this.onMove);
     }
 
     onMove(event) {
-        const finalPosition = this.updatePosition(event.clientX);
-        this.moveSlide(finalPosition);
+        const pointerPosition =
+            event.type === "mousemove"
+                ? event.clientX
+                : event.changedTouches[0].clientX;
+
+        this.moveSlide(this.updatePosition(pointerPosition));
     }
 
-    onEnd() {
-        this.slider.removeEventListener("mousemove", this.onMove);
+    onEnd(event) {
+        const moveType = `${event.type.substr(0, 5)}move`;
+        this.slider.removeEventListener(moveType, this.onMove);
         this.distances.finalPosition = this.distances.movePosition;
     }
 
@@ -45,7 +57,9 @@ export default class Slider {
 
     addEvents() {
         this.slider.addEventListener("mousedown", this.onStart);
+        this.slider.addEventListener("touchstart", this.onStart);
         this.slider.addEventListener("mouseup", this.onEnd);
+        this.slider.addEventListener("touchend", this.onEnd);
     }
 
     init() {
