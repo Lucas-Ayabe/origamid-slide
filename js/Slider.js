@@ -135,6 +135,9 @@ export default class Slider {
         this.onMove = this.onMove.bind(this);
         this.onEnd = this.onEnd.bind(this);
         this.onResize = debounce(this.onResize.bind(this), 200);
+
+        this.activeNextSlide = this.activeNextSlide.bind(this);
+        this.activePrevSlide = this.activePrevSlide.bind(this);
     }
 
     addEvents() {
