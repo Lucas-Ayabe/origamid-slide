@@ -11,6 +11,12 @@ export default class Slider {
         };
     }
 
+    setTransition(active) {
+        this.slides.style.transition = active
+            ? "transform .3s ease-in-out"
+            : "";
+    }
+
     onStart(event) {
         event.preventDefault();
 
@@ -22,6 +28,7 @@ export default class Slider {
 
         this.distances.startX = pointerPosition;
         this.slider.addEventListener(moveType, this.onMove);
+        this.setTransition(false);
     }
 
     onMove(event) {
@@ -37,6 +44,18 @@ export default class Slider {
         const moveType = `${event.type.substr(0, 5)}move`;
         this.slider.removeEventListener(moveType, this.onMove);
         this.distances.finalPosition = this.distances.movePosition;
+        this.changeSlideOnEnd();
+        this.setTransition(true);
+    }
+
+    changeSlideOnEnd() {
+        if (this.distances.movement > 120 && this.index.next !== null) {
+            this.activeNextSlide();
+        } else if (this.distances.movement < -120 && this.index.prev !== null) {
+            this.activePrevSlide();
+        } else {
+            this.changeSlide(this.index.active);
+        }
     }
 
     updatePosition(clientX) {
@@ -90,10 +109,24 @@ export default class Slider {
         this.distances.finalPosition = activeSlide.position;
     }
 
-    init() {
+    activePrevSlide() {
+        if (this.index.prev !== null) {
+            this.changeSlide(this.index.prev);
+        }
+    }
+
+    activeNextSlide() {
+        if (this.index.next !== null) {
+            this.changeSlide(this.index.next);
+        }
+    }
+
+    init(startIndex = 0) {
         this.bindEvents();
         this.addEvents();
         this.slidesConfig();
+        this.changeSlide(startIndex);
+        this.setTransition(true);
         return this;
     }
 }
