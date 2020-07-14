@@ -23,11 +23,25 @@ img {
     cursor: grab;
 }
 
+.slider__slides:hover {
+    will-change: transform;
+}
+
 .slider__slide {
     width: 80vw;
     max-width: 800px;
     margin: 0 20px;
     flex-shrink: 0;
+    opacity: 0.8;
+    box-shadow: 0 2px 4px rgba(80, 80, 80, 0.3);
+    transform: scale(0.8);
+    transition: all 0.4s ease-in-out;
+}
+
+.slider__slide.is-active {
+    box-shadow: 0 15px 30px rgba(30, 30, 30, 0.3);
+    opacity: 1;
+    transform: scale(1);
 }
 
 .slider__slides:active {
