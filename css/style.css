@@ -47,3 +47,25 @@ img {
 .slider__slides:active {
     cursor: grabbing;
 }
+
+.slider__pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.slider__pagination-item.is-active .slider__bullet,
+.slider__bullet:hover {
+    background: #e54;
+}
+
+.slider__bullet {
+    display: block;
+    width: 12px;
+    height: 12px;
+    background: #fb5;
+    border-radius: 50%;
+    overflow: hidden;
+    text-indent: -999px;
+    margin: 5px;
+}

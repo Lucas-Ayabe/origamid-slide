@@ -13,6 +13,8 @@ export default class Slider {
             movement: 0,
             movePosition: 0,
         };
+
+        this.changeEvent = new Event("changeEvent");
     }
 
     setTransition(active) {
@@ -99,6 +101,7 @@ export default class Slider {
         this.slidesIndexNav(index);
         this.distances.finalPosition = activeSlide.position;
         this.changeActiveClass();
+        this.slider.dispatchEvent(this.changeEvent);
     }
 
     changeActiveClass() {
